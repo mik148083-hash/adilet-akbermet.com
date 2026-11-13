@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ky">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f0e6">
+  <meta name="description" content="Үйлөнүү тоюна чакыруу">
+  <title>Адилет &amp; Акбермет — Тойго чакыруу</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@400;500;600&family=Marck+Script&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="topline"></div>
+  <header class="hero">
+    <div class="hero-grain"></div>
+    <nav class="nav"><span class="monogram" id="monogram">А · А</span><span>ҮЙ-БҮЛӨЛҮК МАЙРАМ</span><span class="monogram">♥</span></nav>
+    <div class="hero-content">
+      <p class="eyebrow">СҮЙҮҮ — БИРГЕ БАШТАЛГАН ЖОЛ</p>
+      <h1><span id="brideHero">Адилет</span><i>&</i><span id="groomHero">Акбермет</span></h1>
+      <div class="ornament">✦ ───────── ✦</div>
+      <p class="intro">Жашообуздагы эң өзгөчө күндү сиздер менен бирге өткөргүбүз келет.</p>
+      <p class="date-line" id="heroDate">2026 · 12 · 06</p>
+      <a class="button button-light" href="#rsvp">ЧАКЫРУУНУ КАБЫЛ АЛУУ</a>
+    </div>
+    <div class="hero-bottom">СИЗДЕРДИ КУТУУ МЕНЕН КҮТӨБҮЗ</div>
+  </header>
+
+  <main>
+    <section class="section intro-section">
+      <p class="eyebrow">УРМАТТУУ КОНОГУБУЗ</p>
+      <h2>Бул кубанычты<br>сиз менен бөлүшөлү</h2>
+      <p class="body-copy">Сизди өмүрүбүздөгү эң маанилүү күндөрдүн бирине — үйлөнүү тоюбузга чын жүрөктөн чакырабыз. Келишиңиз биз үчүн чоң белек!</p>
+      <div class="flourish">❧</div>
+    </section>
+
+    <section class="countdown-section">
+      <div class="section-heading"><p class="eyebrow">КҮТҮҮГӨ АЗ КАЛДЫ</p><h2>Тойго чейин</h2></div>
+      <div class="countdown" aria-live="polite">
+        <div><strong id="days">00</strong><span>КҮН</span></div>
+        <div><strong id="hours">00</strong><span>СААТ</span></div>
+        <div><strong id="minutes">00</strong><span>МҮНӨТ</span></div>
+        <div><strong id="seconds">00</strong><span>СЕКУНД</span></div>
+      </div>
+    </section>
+
+    <section class="section details-section">
+      <p class="eyebrow">МАЙРАМДЫН ӨЗГӨЧӨ КҮНҮ</p><h2>Күнү жана убактысы</h2>
+      <div class="date-card">
+        <div class="date-month" id="monthName">ДЕКАБРЬ</div>
+        <div class="date-day" id="dayNumber">06</div>
+        <div class="date-weekday" id="weekday">ЖЕКШЕМБИ</div>
+        <div class="date-time" id="startTime">13:00</div>
+      </div>
+      <button class="button button-dark" id="calendarButton">КАЛЕНДАРГА КОШУУ</button>
+    </section>
+
+    <section class="section program-section">
+      <p class="eyebrow">БИРГЕ ӨТКӨРГӨН УБАКЫТ</p><h2>Тойдун программасы</h2>
+      <div class="timeline" id="timeline">
+        <article class="timeline-item"><span class="timeline-time">13:00</span><div><h3>Конокторду тосуп алуу</h3><p>Жылуу саламдашуу жана сүрөткө түшүү</p></div></article>
+        <article class="timeline-item"><span class="timeline-time">16:00</span><div><h3>Той аземи</h3><p>Кубанычтуу көз ирмемдер жана куттуктоолор</p></div></article>
+        <article class="timeline-item"><span class="timeline-time">18:00</span><div><h3>Майрамдык дасторкон</h3><p>Жакындарыбыз менен шаңдуу кеч</p></div></article>
+      </div>
+    </section>
+
+    <section class="section dress-section">
+      <p class="eyebrow">СИЗДЕР ҮЧҮН КИЧИНЕКЕЙ СУРОНУЧ</p><h2>Кийим түсү</h2>
+      <p class="body-copy">Майрамдын назик маанайын сактоо үчүн төмөнкү түстөрдү тандасаңыздар кубанычта болобуз.</p>
+      <div class="swatches">
+        <div><span style="--swatch:#20211d"></span><b>Кара</b></div>
+        <div><span style="--swatch:#8a715d"></span><b>Кум түсү</b></div>
+        <div><span style="--swatch:#6c3444"></span><b>Бордo</b></div>
+        <div><span style="--swatch:#e8dfd0"></span><b>Сүт түстүү</b></div>
+      </div>
+    </section>
+
+    <section class="venue-section">
+      <div class="venue-copy">
+        <p class="eyebrow">БИЗДИН ЖОЛУГУШУУ ЖЕРИБИЗ</p><h2 id="venueName">«Алина» рестораны</h2>
+        <p id="venueAddress">Баткен облусу, Кадамжай району, Мамажанов көчөсү, 10/2а</p>
+        <a class="button button-light" id="mapLink" href="https://maps.google.com/?q=Алина+ресторан" target="_blank" rel="noopener">КАРТАДАН КӨРҮҮ ↗</a>
+      </div>
+      <div class="map-frame"><iframe id="mapFrame" title="Той өтүүчү жердин картасы" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Алина%20ресторан&t=&z=14&ie=UTF8&iwloc=&output=embed"></iframe></div>
+    </section>
+
+    <section class="section rsvp-section" id="rsvp">
+      <p class="eyebrow">СИЗДЕН ЖООП КҮТӨБҮЗ</p><h2>Биз менен болосузбу?</h2>
+      <p class="body-copy">Келериңизди алдын ала билдирип койсоңуз, даярдыгыбызга чоң жардам болот.</p>
+      <form id="rsvpForm" name="toy-rsvp" method="POST" data-netlify="true" action="/thanks.html"><input type="hidden" name="form-name" value="toy-rsvp">
+        <label>Атыңыз-жөнүңүз<input name="guestName" required placeholder="Атыңызды жазыңыз"></label>
+        <label>Жообуңуз<select name="attendance" required><option value="">Тандаңыз</option><option>Келем</option><option>Келе албайм</option><option>Азырынча белгисиз</option></select></label>
+        <label>Канча киши болосуздар?<input name="guests" type="number" min="1" max="20" value="1" required></label>
+        <label>Кошумча билдирүү <small>(кааласаңыз)</small><textarea name="note" rows="3" placeholder="Билдирүүңүз..."></textarea></label>
+        <button class="button button-dark" type="submit">ЖООПТУ ЖӨНӨТҮҮ</button>
+        <p class="form-note" id="formNote">Жообуңуз уюштуруучуларга жөнөтүлөт.</p>
+      </form>
+    </section>
+  </main>
+
+  <footer><div class="ornament">✦ ───── ❧ ───── ✦</div><p>Сүйүү жана урматтоо менен</p><h2 id="footerNames">Адилет & Акбермет</h2><p class="footer-date" id="footerDate">06 · 12 · 2026</p></footer>
+  
+  <script src="config.js"></script><script src="script.js"></script>
+</body>
+</html>
