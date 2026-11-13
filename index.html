@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ky" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Адилет & Акбермет — Тойго чакыруу</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="overflow-hidden" id="mainBody">
+
+    <!-- Floating Music & Auto-Scroll Controls (Visible after opening) -->
+    <div id="floatingControls" class="fixed top-4 right-4 z-40 hidden flex items-center gap-2">
+        <button id="toggleAutoScrollBtn" onclick="toggleAutoScroll()" class="bg-white/90 backdrop-blur-md text-[#2C2724] border border-[#C5A059]/40 px-3 py-2 rounded-full shadow-md text-xs font-medium flex items-center gap-1.5 hover:bg-[#FAF6F0] transition">
+            <i id="scrollIcon" class="fas fa-pause text-[#C5A059]"></i>
+            <span id="scrollText">Жылдыруу</span>
+        </button>
+        <button id="musicBtn" onclick="toggleMusic()" class="bg-white/90 backdrop-blur-md text-[#C5A059] border border-[#C5A059]/40 w-10 h-10 rounded-full shadow-md flex items-center justify-center hover:bg-[#FAF6F0] transition" title="Музыка">
+            <i id="musicIcon" class="fas fa-volume-mute"></i>
+        </button>
+    </div>
+
+    <!-- 1. ENVELOPE COVER SCREEN -->
+    <section id="envelopeScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#FAF6F0] px-4 transition-opacity duration-1000">
+        <!-- Decorative Corner Flourishes -->
+        <div class="absolute top-6 left-6 w-16 h-16 border-t-2 border-l-2 border-[#C5A059]/40 rounded-tl-xl"></div>
+        <div class="absolute top-6 right-6 w-16 h-16 border-t-2 border-r-2 border-[#C5A059]/40 rounded-tr-xl"></div>
+        <div class="absolute bottom-6 left-6 w-16 h-16 border-b-2 border-l-2 border-[#C5A059]/40 rounded-bl-xl"></div>
+        <div class="absolute bottom-6 right-6 w-16 h-16 border-b-2 border-r-2 border-[#C5A059]/40 rounded-br-xl"></div>
+
+        <!-- Top Kyrgyz Text -->
+        <div class="text-center mb-8 sm:mb-10 transition-opacity duration-500" id="envelopeHeader">
+            <p class="text-[11px] sm:text-xs tracking-[0.28em] uppercase text-[#9E7B36] font-semibold mb-2">
+                ӨЗГӨЧӨ КҮН · ӨЗГӨЧӨ АДАМДАР
+            </p>
+            <h1 class="font-serif-elegant text-3xl sm:text-5xl text-[#2C2724] font-semibold">
+                Сизге чакыруу
+            </h1>
+            <p class="text-xs sm:text-sm text-[#6E655F] mt-2 italic font-serif-elegant text-lg">
+                Жылуулук жана сүйүү менен.
+            </p>
+        </div>
+
+        <!-- 3D Cream Envelope -->
+        <div class="envelope-wrapper my-2">
+            <div id="envelopeBox" class="envelope-container">
+                <!-- Inner White Card -->
+                <div class="inner-card">
+                    <span class="text-[10px] tracking-[0.25em] uppercase text-[#9E7B36] mb-1">Үйлөнүү тойго чакыруу</span>
+                    <h2 class="font-serif-elegant text-2xl sm:text-3xl font-bold text-[#2C2724] tracking-wide">
+                        АДИЛЕТ & АКБЕРМЕТ
+                    </h2>
+                    <div class="w-12 h-[1px] bg-[#C5A059] my-2"></div>
+                    <p class="text-xs sm:text-sm font-medium text-[#6E655F]">06.12.2026</p>
+                    <p class="text-[11px] text-[#9E7B36] mt-1">«Алина» рестораны</p>
+                </div>
+
+                <!-- Envelope Flaps -->
+                <div class="pocket-left"></div>
+                <div class="pocket-right"></div>
+                <div class="pocket-bottom"></div>
+                <div class="top-flap"></div>
+
+                <!-- Wax Seal Button -->
+                <button id="waxSealBtn" onclick="openEnvelope()" class="wax-seal seal-pulse" aria-label="Конвертти ачуу">
+                    <div class="wax-seal-inner">А&А</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Bottom Kyrgyz Prompt -->
+        <div class="text-center mt-8 sm:mt-10 transition-opacity duration-500" id="envelopeFooter">
+            <p class="text-xs uppercase tracking-[0.2em] text-[#6E655F] mb-1">Жеке сиз үчүн</p>
+            <button onclick="openEnvelope()" class="text-sm sm:text-base font-medium text-[#9E7B36] hover:text-[#2C2724] transition flex items-center gap-2 mx-auto mt-1">
+                <span>Ачуу үчүн мөөрдү басыңыз</span>
+                <i class="fas fa-hand-pointer animate-bounce text-xs"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- 2. MAIN INVITATION CONTENT -->
+    <main id="invitationContent" class="hidden opacity-0 transition-opacity duration-1000 max-w-2xl mx-auto px-5 py-12 sm:py-20 space-y-16 sm:space-y-24">
+
+        <!-- HERO SECTION -->
+        <section class="text-center pt-6 reveal-left">
+            <div class="inline-block px-4 py-1.5 rounded-full border border-[#C5A059]/40 bg-white/60 text-[11px] tracking-[0.25em] uppercase text-[#9E7B36] mb-6">
+                Үйлөнүү той салтанаты
+            </div>
+            
+            <h1 class="font-serif-elegant text-5xl sm:text-7xl font-semibold text-[#2C2724] leading-tight">
+                Адилет
+                <span class="block font-script text-4xl sm:text-6xl text-[#C5A059] my-1">&</span>
+                Акбермет
+            </h1>
+
+            <div class="flex items-center justify-center gap-4 my-8">
+                <div class="h-[1px] w-16 bg-gradient-to-r from-transparent to-[#C5A059]"></div>
+                <i class="fas fa-heart text-[#C5A059] text-sm"></i>
+                <div class="h-[1px] w-16 bg-gradient-to-l from-transparent to-[#C5A059]"></div>
+            </div>
+
+            <p class="font-serif-elegant text-xl sm:text-2xl text-[#4A433E] leading-relaxed max-w-lg mx-auto">
+                Урматтуу биздин жакындарыбыз жана кадырлуу конокторубуз!
+            </p>
+            <p class="text-sm sm:text-base text-[#6E655F] leading-relaxed mt-4 max-w-md mx-auto">
+                Сиздерди өмүрүбүздөгү эң бактылуу, жаркын күнүбүзгө — үйлөнүү үлпөт тоюбузга арналган салтанаттуу кечебиздин кадырлуу коногу болууга чакырабыз!
+            </p>
+        </section>
+
+        <!-- DATE & FULL DECEMBER 2026 CALENDAR -->
+        <section class="bg-white rounded-3xl p-6 sm:p-10 shadow-sm border border-[#E7DCCB] text-center reveal-left">
+            <p class="text-xs tracking-[0.25em] uppercase text-[#9E7B36] font-semibold mb-2">Той күнү</p>
+            <h2 class="font-serif-elegant text-3xl sm:text-4xl font-bold text-[#2C2724] mb-1">
+                6-Декабрь, 2026
+            </h2>
+            <p class="text-sm text-[#6E655F] mb-8">Жекшемби · Саат 13:00</p>
+
+            <!-- Full December 2026 Calendar Grid -->
+            <div class="max-w-sm mx-auto bg-[#FAF6F0] rounded-2xl p-4 sm:p-5 border border-[#EFE6D8]">
+                <div class="flex justify-between items-center mb-4 px-2">
+                    <span class="font-serif-elegant text-lg font-bold text-[#2C2724]">Декабрь 2026</span>
+                    <span class="text-xs text-[#9E7B36] font-medium">06.12.2026</span>
+                </div>
+                
+                <!-- Days of week (Starts Tuesday Dec 1, 2026) -->
+                <div class="grid grid-cols-7 gap-1 text-[11px] font-semibold text-[#9E7B36] mb-2">
+                    <div>Дш</div>
+                    <div>Шш</div>
+                    <div>Шр</div>
+                    <div>Бш</div>
+                    <div>Жм</div>
+                    <div>Иш</div>
+                    <div>Жш</div>
+                </div>
+
+                <!-- Calendar Dates for December 2026 (Dec 1 is Tuesday) -->
+                <div class="grid grid-cols-7 gap-1.5 text-xs sm:text-sm text-[#2C2724]" id="calendarGrid">
+                    <!-- Empty slot for Monday Nov 30 -->
+                    <div class="p-2 text-gray-300"></div>
+                    <div class="p-2">1</div>
+                    <div class="p-2">2</div>
+                    <div class="p-2">3</div>
+                    <div class="p-2">4</div>
+                    <div class="p-2">5</div>
+                    <!-- Highlighted Wedding Date: December 6 -->
+                    <div class="relative p-2 font-bold text-white bg-[#C5A059] rounded-full shadow-md flex items-center justify-center">
+                        6
+                        <i class="fas fa-heart text-[8px] text-white absolute -top-1 -right-0.5"></i>
+                    </div>
+                    <div class="p-2">7</div>
+                    <div class="p-2">8</div>
+                    <div class="p-2">9</div>
+                    <div class="p-2">10</div>
+                    <div class="p-2">11</div>
+                    <div class="p-2">12</div>
+                    <div class="p-2">13</div>
+                    <div class="p-2">14</div>
+                    <div class="p-2">15</div>
+                    <div class="p-2">16</div>
+                    <div class="p-2">17</div>
+                    <div class="p-2">18</div>
+                    <div class="p-2">19</div>
+                    <div class="p-2">20</div>
+                    <div class="p-2">21</div>
+                    <div class="p-2">22</div>
+                    <div class="p-2">23</div>
+                    <div class="p-2">24</div>
+                    <div class="p-2">25</div>
+                    <div class="p-2">26</div>
+                    <div class="p-2">27</div>
+                    <div class="p-2">28</div>
+                    <div class="p-2">29</div>
+                    <div class="p-2">30</div>
+                    <div class="p-2">31</div>
+                </div>
+            </div>
+
+            <!-- Countdown Timer -->
+            <div class="mt-8 pt-6 border-t border-[#EFE6D8]">
+                <p class="text-xs uppercase tracking-widest text-[#6E655F] mb-4">Тойго чейин калды:</p>
+                <div class="grid grid-cols-4 gap-2 sm:gap-4 max-w-sm mx-auto">
+                    <div class="bg-[#FAF6F0] rounded-xl p-3 border border-[#E7DCCB]">
+                        <span id="days" class="block font-serif-elegant text-2xl sm:text-3xl font-bold text-[#2C2724]">00</span>
+                        <span class="text-[10px] uppercase text-[#9E7B36]">Күн</span>
+                    </div>
+                    <div class="bg-[#FAF6F0] rounded-xl p-3 border border-[#E7DCCB]">
+                        <span id="hours" class="block font-serif-elegant text-2xl sm:text-3xl font-bold text-[#2C2724]">00</span>
+                        <span class="text-[10px] uppercase text-[#9E7B36]">Саат</span>
+                    </div>
+                    <div class="bg-[#FAF6F0] rounded-xl p-3 border border-[#E7DCCB]">
+                        <span id="minutes" class="block font-serif-elegant text-2xl sm:text-3xl font-bold text-[#2C2724]">00</span>
+                        <span class="text-[10px] uppercase text-[#9E7B36]">Мүнөт</span>
+                    </div>
+                    <div class="bg-[#FAF6F0] rounded-xl p-3 border border-[#E7DCCB]">
+                        <span id="seconds" class="block font-serif-elegant text-2xl sm:text-3xl font-bold text-[#2C2724]">00</span>
+                        <span class="text-[10px] uppercase text-[#9E7B36]">Секунд</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROGRAM TIMELINE -->
+        <section class="text-center reveal-left">
+            <p class="text-xs tracking-[0.25em] uppercase text-[#9E7B36] font-semibold mb-2">Кеченин программасы</p>
+            <h2 class="font-serif-elegant text-3xl sm:text-4xl font-bold text-[#2C2724] mb-8">Той тартиби</h2>
+
+            <div class="space-y-4 max-w-md mx-auto text-left">
+                <div class="bg-white p-5 rounded-2xl border border-[#E7DCCB] flex items-center gap-4 shadow-sm">
+                    <div class="w-12 h-12 rounded-full bg-[#FAF6F0] border border-[#C5A059]/40 flex items-center justify-center text-[#C5A059] shrink-0">
+                        <i class="fas fa-glass-cheers"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-[#9E7B36]">13:00</span>
+                        <h3 class="font-serif-elegant text-xl font-bold text-[#2C2724]">Конокторду тосуп алуу</h3>
+                        <p class="text-xs text-[#6E655F]">Фуршет жана жылуу маанайдагы жолугушуу</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-[#E7DCCB] flex items-center gap-4 shadow-sm">
+                    <div class="w-12 h-12 rounded-full bg-[#FAF6F0] border border-[#C5A059]/40 flex items-center justify-center text-[#C5A059] shrink-0">
+                        <i class="fas fa-rings-wedding fas fa-heart"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-[#9E7B36]">18:00</span>
+                        <h3 class="font-serif-elegant text-xl font-bold text-[#2C2724]">Салтанаттуу ачылыш</h3>
+                        <p class="text-xs text-[#6E655F]">Жаш жубайларды тосуп алуу жана ак бата</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-[#E7DCCB] flex items-center gap-4 shadow-sm">
+                    <div class="w-12 h-12 rounded-full bg-[#FAF6F0] border border-[#C5A059]/40 flex items-center justify-center text-[#C5A059] shrink-0">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-[#9E7B36]">19:00 — 23:00</span>
+                        <h3 class="font-serif-elegant text-xl font-bold text-[#2C2724]">Шоу-программа жана бий</h3>
+                        <p class="text-xs text-[#6E655F]">Каалоо-тилектер, оюн-зоок жана майрамдык кече</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LOCATION SECTION -->
+        <section class="bg-white rounded-3xl p-6 sm:p-10 shadow-sm border border-[#E7DCCB] text-center reveal-left">
+            <div class="w-14 h-14 rounded-full bg-[#FAF6F0] border border-[#C5A059]/40 flex items-center justify-center text-[#C5A059] text-xl mx-auto mb-4">
+                <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <p class="text-xs tracking-[0.25em] uppercase text-[#9E7B36] font-semibold mb-1">Өтүүчү жай</p>
+            <h2 class="font-serif-elegant text-3xl sm:text-4xl font-bold text-[#2C2724] mb-2">
+                «Алина» рестораны
+            </h2>
+            <p class="text-sm text-[#6E655F] mb-6">
+                Той салтанаты «Алина» банкеттик залында өтөт. Сиздерди кубануу менен күтөбүз!
+            </p>
+
+            <a href="https://www.google.com/maps/search/?api=1&query=%D0%90%D0%BB%D0%B8%D0%BD%D0%B0%20%D1%80%D0%B5%D1%81%D1%82%D0%BE%D1%80%D0%B0%D0%BD%20%D0%91%D0%B8%D1%88%D0%BA%D0%B5%D0%BA" target="_blank" rel="noopener noreferrer" 
+               class="inline-flex items-center gap-2 bg-[#2C2724] hover:bg-[#433C38] text-white text-sm font-medium px-6 py-3.5 rounded-full shadow-md transition">
+                <i class="fas fa-location-arrow text-[#C5A059]"></i>
+                <span>Google Maps'тен ачуу</span>
+            </a>
+        </section>
+
+        <!-- RSVP & GUESTBOOK WISHES SECTION -->
+        <section class="bg-white rounded-3xl p-6 sm:p-10 shadow-sm border border-[#E7DCCB] reveal-left">
+            <div class="text-center mb-8">
+                <p class="text-xs tracking-[0.25em] uppercase text-[#9E7B36] font-semibold mb-2">Коноктордун жообу</p>
+                <h2 class="font-serif-elegant text-3xl sm:text-4xl font-bold text-[#2C2724]">Катышууңузду тастыктаңыз</h2>
+                <p class="text-xs sm:text-sm text-[#6E655F] mt-2">
+                    Сураныч, тойго келериңизди жана каалоо-тилегиңизди төмөнкү форма аркылуу калтырыңыз
+                </p>
+            </div>
+
+            <form id="rsvpForm" onsubmit="handleRsvpSubmit(event)" class="space-y-4 max-w-md mx-auto">
+                <div>
+                    <label class="block text-xs font-medium text-[#2C2724] mb-1.5">Аты-жөнүңүз *</label>
+                    <input type="text" id="guestName" required placeholder="Мисалы: Азамат жана Айгүл" 
+                           class="w-full px-4 py-3 rounded-xl bg-[#FAF6F0] border border-[#E7DCCB] text-sm focus:outline-none focus:border-[#C5A059]">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-[#2C2724] mb-1.5">Тойго келесизби? *</label>
+                    <select id="guestStatus" class="w-full px-4 py-3 rounded-xl bg-[#FAF6F0] border border-[#E7DCCB] text-sm focus:outline-none focus:border-[#C5A059]">
+                        <option value="Сөзсүз келем">Сөзсүз келем!</option>
+                        <option value="Жубайым менен келем">Жубайым / үй-бүлөм менен келем</option>
+                        <option value="Тилекке каршы, келе албайм">Тилекке каршы, келе албайм</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-[#2C2724] mb-1.5">Жаш жубайларга каалоо-тилек</label>
+                    <textarea id="guestWish" rows="3" placeholder="Жүрөктөн чыккан жылуу сөздөрүңүздү жазыңыз..." 
+                              class="w-full px-4 py-3 rounded-xl bg-[#FAF6F0] border border-[#E7DCCB] text-sm focus:outline-none focus:border-[#C5A059]"></textarea>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="pt-2 flex flex-col sm:flex-row gap-3">
+                    <button type="submit" class="flex-1 bg-[#C5A059] hover:bg-[#9E7B36] text-white font-medium text-sm py-3.5 px-6 rounded-xl shadow-md transition flex items-center justify-center gap-2">
+                        <i class="fas fa-paper-plane"></i>
+                        <span>Жооп жөнөтүү</span>
+                    </button>
+
+                    <!-- Button to view all wishes -->
+                    <button type="button" onclick="openWishesModal()" class="flex-1 bg-[#FAF6F0] hover:bg-[#EFE6D8] text-[#2C2724] border border-[#C5A059] font-medium text-sm py-3.5 px-4 rounded-xl transition flex items-center justify-center gap-2">
+                        <i class="fas fa-heart text-[#C5A059]"></i>
+                        <span>Коноктордун каалоо-тилеги</span>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Status Toast Message -->
+            <div id="rsvpSuccessMsg" class="hidden mt-4 p-3 rounded-xl bg-green-50 border border-green-200 text-green-800 text-xs text-center">
+                Рахмат! Сиздин жообуңуз жана каалоо-тилегиңиз ийгиликтүү кошулду.
+            </div>
+        </section>
+
+        <!-- HOSTS / FOOTER SECTION -->
+        <footer class="text-center pt-6 pb-12 reveal-left">
+            <div class="w-16 h-[1px] bg-[#C5A059] mx-auto mb-6"></div>
+            <p class="text-xs tracking-[0.25em] uppercase text-[#9E7B36] font-semibold mb-2">Той ээлери:</p>
+            <h3 class="font-serif-elegant text-3xl sm:text-4xl font-bold text-[#2C2724]">
+                Кеңешбек & Эльмира
+            </h3>
+            <p class="text-xs text-[#6E655F] mt-4">
+                Сиздерди терең урматтоо менен күтөбүз!
+            </p>
+            <p class="font-script text-3xl text-[#C5A059] mt-6">Адилет & Акбермет · 2026</p>
+        </footer>
+
+    </main>
+
+    <!-- MODAL FOR VIEWING ALL GUESTBOOK WISHES -->
+    <div id="wishesModal" class="fixed inset-0 z-50 hidden bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full max-h-[82vh] flex flex-col shadow-2xl border border-[#E7DCCB] overflow-hidden">
+            <!-- Modal Header -->
+            <div class="px-6 py-4 bg-[#FAF6F0] border-b border-[#E7DCCB] flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-heart text-[#C5A059]"></i>
+                    <h3 class="font-serif-elegant text-2xl font-bold text-[#2C2724]">Коноктордун каалоо-тилеги</h3>
+                </div>
+                <button onclick="closeWishesModal()" class="w-8 h-8 rounded-full bg-white border border-[#E7DCCB] text-[#6E655F] hover:text-[#2C2724] flex items-center justify-center">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body (List of Wishes) -->
+            <div id="wishesListContainer" class="p-6 overflow-y-auto space-y-4 flex-1 bg-[#FAF6F0]/40">
+                <!-- Wishes rendered via JavaScript -->
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="px-6 py-3 bg-[#FAF6F0] border-t border-[#E7DCCB] text-right">
+                <button onclick="closeWishesModal()" class="px-5 py-2 rounded-full bg-[#2C2724] text-white text-xs font-medium hover:bg-[#433C38] transition">
+                    Жабуу
+                </button>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
